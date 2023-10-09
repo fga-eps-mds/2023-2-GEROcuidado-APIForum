@@ -44,7 +44,7 @@ RUN chmod +x /app/entrypoint.sh
 
 USER node
 
-EXPOSE 300x
+EXPOSE 3002
 ENTRYPOINT ["/app/entrypoint.sh"]
 
 

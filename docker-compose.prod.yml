@@ -1,21 +1,20 @@
 version: '3.7'
 services:
-  gerocuidado-forum-api:
-    image: gerocuidadodev/node:18.17.0-alpine-dev
-    container_name: gerocuidado-forum-api
-    volumes:
-      - '.:/home/node/app'
-    entrypoint: ./.docker/entrypoint.sh
+  gerocuidado-forum-api-prod:
+    image: gerocuidadodev/gerocuidado-forum-api:latest
+    container_name: gerocuidado-forum-api-prod
     environment:
-      - NODE_ENV=development
+      - DB_HOST=gerocuidado-forum-db
+      - DB_USERNAME=postgres
+      - DB_PASS=postgres
+      - DB_DATABASE=gerocuidado-forum-db
+      - DB_PORT=5002
     ports:
       - '3002:3002'
-      - '7002:7002'
     depends_on:
       - gerocuidado-forum-db
     networks:
       - gerocuidado-forum-net
-      - gerocuidado-apis-net
 
   gerocuidado-forum-db:
     build:
@@ -24,7 +23,6 @@ services:
     command: postgres -c 'config_file=/etc/postgresql/postgresql.conf'
     container_name: gerocuidado-forum-db
     volumes:
-      - './db/postgres:/var/lib/postgresql/data'
       - './.docker/postgres/config/postgresql.conf:/etc/postgresql/postgresql.conf'
     environment:
       - POSTGRES_DB=gerocuidado-forum-db
@@ -38,6 +36,3 @@ services:
 networks:
   gerocuidado-forum-net:
     driver: bridge
-  gerocuidado-apis-net:
-    name: gerocuidado-apis-net
-    external: true

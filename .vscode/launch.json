@@ -7,8 +7,9 @@
         {
             "type": "node",
             "request": "attach",
+            "protocol": "inspector",
             "restart": true,
-            "name": "gerocuidado-forum-api",
+            "name": "API",
             "port": 7002,
             "address": "0.0.0.0",
             "localRoot": "${workspaceFolder}/",

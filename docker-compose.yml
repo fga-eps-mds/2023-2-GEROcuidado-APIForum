@@ -15,6 +15,7 @@ services:
       - gerocuidado-forum-db
     networks:
       - gerocuidado-forum-net
+      - gerocuidado-apis-net
 
   gerocuidado-forum-db:
     build:
@@ -36,3 +37,6 @@ services:
 networks:
   gerocuidado-forum-net:
     driver: bridge
+  gerocuidado-apis-net:
+    name: gerocuidado-apis-net
+    external: true

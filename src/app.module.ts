@@ -3,12 +3,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
 import { AutenticacaoGuard } from './autenticacao.guard';
 import { DbModule } from './config/db/db.module';
 import { DbService } from './config/db/db.service';
-import { PostagemController } from './postagem/postagem.controller';
-
+import { PostagemModule } from './postagem/postagem.module';
 
 const ENV = process.env.NODE_ENV;
 
@@ -37,8 +35,9 @@ const ENV = process.env.NODE_ENV;
       },
     ]),
     DbModule,
+    PostagemModule,
   ],
-  controllers: [AppController, PostagemController],
+  controllers: [],
   providers: [
     {
       provide: APP_GUARD,

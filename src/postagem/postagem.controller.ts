@@ -13,6 +13,4 @@ export class PostagemController {
     // Criar uma rota para remover uma postagem
 
     // Criar uma rota para editar uma postagem
-
-
 }

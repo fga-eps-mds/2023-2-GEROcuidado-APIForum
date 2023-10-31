@@ -22,7 +22,7 @@ const ENV = process.env.NODE_ENV;
     }),
     ClientsModule.registerAsync([
       {
-        name: 'AUTH_CLIENT',
+        name: 'USUARIO_CLIENT',
         imports: [ConfigModule],
         useFactory: (configService: ConfigService) => ({
           transport: Transport.TCP,

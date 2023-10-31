@@ -40,8 +40,14 @@ export class PublicacaoService {
 
     return { ...publicacao, usuario };
   }
+
   async update(id: number, body: UpdatePublicacaoDto): Promise<Publicacao> {
-    return Promise.resolve({} as any);
+    const found = await this.findOne(id);
+    const merged = Object.assign(found, body);
+    const updated = await this._repository.save(merged);
+    return updated;
+
+    // return Promise.resolve({} as any);
   }
 
   async findAll(
@@ -90,5 +96,10 @@ export class PublicacaoService {
     whereClause += getWhereClauseNumber(filter.id, 'id');
 
     return whereClause;
+  }
+
+  async remove(id: number) {
+    const found = await this.findOne(id);
+    return this._repository.remove(found);
   }
 }

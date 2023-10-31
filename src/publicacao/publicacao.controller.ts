@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { HttpResponse } from '../shared/classes/http-response';
 import { Filtering, Filtrate } from '../shared/decorators/filtrate.decorator';
 import { Ordenate, Ordering } from '../shared/decorators/ordenate.decorator';
@@ -49,7 +57,9 @@ export class PublicacaoController {
     return new HttpResponse<Publicacao>(created).onCreated();
   }
 
-  // Criar uma rota para remover uma Publicacao
-
-  // Criar uma rota para editar uma Publicacao
+  @Delete(':id')
+  async remove(@Param() param: IdValidator): Promise<Response<unknown>> {
+    const deleted = await this._service.remove(param.id);
+    return new HttpResponse(deleted).onDeleted();
+  }
 }

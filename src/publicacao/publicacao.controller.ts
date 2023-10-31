@@ -32,7 +32,7 @@ export class PublicacaoController {
     @Filtrate() queryParam: Filtering<IPublicacaoFilter>,
     @Paginate() pagination: Pagination,
     @Ordenate() ordering: Ordering,
-  ): Promise<ResponsePaginate<IPublicacaoUsuario>> {
+  ): Promise<ResponsePaginate<IPublicacaoUsuario[]>> {
     return this._service.findAll(queryParam.filter, ordering, pagination);
   }
 

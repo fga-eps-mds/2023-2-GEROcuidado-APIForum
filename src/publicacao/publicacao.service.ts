@@ -5,7 +5,10 @@ import { lastValueFrom, timeout } from 'rxjs';
 import { Repository } from 'typeorm';
 import { Ordering } from '../shared/decorators/ordenate.decorator';
 import { Pagination } from '../shared/decorators/paginate.decorator';
-import { getWhereClauseNumber } from '../shared/helpers/sql-query-helper';
+import {
+  getWhereClauseNumber,
+  getWhereClauseString,
+} from '../shared/helpers/sql-query-helper';
 import { ResponsePaginate } from '../shared/interfaces/response-paginate.interface';
 import { CreatePublicacaoDto } from './dto/create-publicacao.dto';
 import { UpdatePublicacaoDto } from './dto/update-publicacao.dto';
@@ -42,19 +45,16 @@ export class PublicacaoService {
   }
 
   async update(id: number, body: UpdatePublicacaoDto): Promise<Publicacao> {
-    const found = await this.findOne(id);
+    const found = await this._repository.findOneOrFail({ where: { id } });
     const merged = Object.assign(found, body);
-    const updated = await this._repository.save(merged);
-    return updated;
-
-    // return Promise.resolve({} as any);
+    return this._repository.save(merged);
   }
 
   async findAll(
     filter: IPublicacaoFilter,
     ordering: Ordering,
     paging: Pagination,
-  ): Promise<ResponsePaginate<IPublicacaoUsuario>> {
+  ): Promise<ResponsePaginate<IPublicacaoUsuario[]>> {
     const limit = paging.limit;
     const offset = paging.offset;
     const sort = ordering.column;
@@ -94,12 +94,14 @@ export class PublicacaoService {
     let whereClause = '1 = 1 ';
 
     whereClause += getWhereClauseNumber(filter.id, 'id');
+    whereClause += getWhereClauseString(filter.titulo, 'titulo');
+    whereClause += getWhereClauseNumber(filter.categoria, 'categoria');
 
     return whereClause;
   }
 
   async remove(id: number) {
-    const found = await this.findOne(id);
+    const found = await this._repository.findOneOrFail({ where: { id } });
     return this._repository.remove(found);
   }
 }

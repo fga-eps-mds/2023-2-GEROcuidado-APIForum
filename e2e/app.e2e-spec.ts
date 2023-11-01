@@ -31,10 +31,10 @@ describe('App (e2e)', () => {
     await app.init();
   });
 
-  describe('GET: /api/forum/not-found', () => {
+  describe('POST: /api/forum/not-found', () => {
     it('/api/forum/not-found (GET)', async () => {
       const response = await request(app.getHttpServer())
-        .get('/not-found')
+        .post('/not-found')
         .set('Content-Type', 'application/json')
         .send();
 

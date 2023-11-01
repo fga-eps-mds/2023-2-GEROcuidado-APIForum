@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AutenticacaoGuard } from './autenticacao.guard';
 import { DbModule } from './config/db/db.module';
 import { DbService } from './config/db/db.service';
+import { PublicacaoModule } from './publicacao/publicacao.module';
 
 const ENV = process.env.NODE_ENV;
 
@@ -21,7 +22,7 @@ const ENV = process.env.NODE_ENV;
     }),
     ClientsModule.registerAsync([
       {
-        name: 'AUTH_CLIENT',
+        name: 'USUARIO_CLIENT',
         imports: [ConfigModule],
         useFactory: (configService: ConfigService) => ({
           transport: Transport.TCP,
@@ -34,6 +35,7 @@ const ENV = process.env.NODE_ENV;
       },
     ]),
     DbModule,
+    PublicacaoModule,
   ],
   controllers: [],
   providers: [

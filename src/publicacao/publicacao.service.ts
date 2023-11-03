@@ -66,7 +66,7 @@ export class PublicacaoService {
       .where(`${where}`)
       .limit(limit)
       .offset(offset)
-      .orderBy(sort, order)
+      .orderBy(`"${sort}"`, order)
       .getManyAndCount();
 
     const ids = result.map((item) => item.idUsuario);

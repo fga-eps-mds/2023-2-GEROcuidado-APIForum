@@ -96,6 +96,9 @@ export class PublicacaoService {
     whereClause += getWhereClauseNumber(filter.id, 'id');
     whereClause += getWhereClauseString(filter.titulo, 'titulo');
     whereClause += getWhereClauseNumber(filter.categoria, 'categoria');
+    if(filter.isReported) {
+      whereClause += 'AND "contagemReportes" > 0'
+    }
 
     return whereClause;
   }

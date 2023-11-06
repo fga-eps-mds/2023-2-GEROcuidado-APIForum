@@ -1,8 +1,10 @@
 import {
+  IsArray,
   IsDateString,
   IsEnum,
   IsNotEmpty,
   IsNumber,
+  IsOptional,
   IsString,
   MaxLength,
 } from 'class-validator';
@@ -31,6 +33,8 @@ export class CreatePublicacaoDto {
   @IsEnum(ECategoriaPublicacao)
   categoria!: ECategoriaPublicacao;
 
-  @IsNumber()
-  contagemReportes!: number;
+  @IsOptional()
+  @IsArray()
+  @IsNumber({}, { each: true })
+  idUsuarioReporte?: number[];
 }

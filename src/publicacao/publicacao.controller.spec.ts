@@ -22,12 +22,12 @@ describe('PublicacaoController', () => {
     idUsuario: 1,
     categoria: ECategoriaPublicacao.ALIMENTACAO,
     dataHora: new Date(),
-    contagemReportes: 0,
   };
 
   const publi = {
     ...publiDto,
     id: 1,
+    idUsuarioReporte: [],
   };
 
   const publiUsuario = {

@@ -133,5 +133,30 @@ describe('PublicacaoService', () => {
       expect(count).toEqual(1);
       expect(data[0]).toEqual(publicacao);
     });
+
+    it('should findAll Publicacao with isReported', async () => {
+      jest.spyOn(clientProxy, 'send').mockReturnValue(of([{ id: 1 }]) as any);
+      jest.spyOn(repository, 'createQueryBuilder').mockReturnValue({
+        where: () => ({
+          limit: () => ({
+            offset: () => ({
+              orderBy: () => ({
+                getManyAndCount: jest
+                  .fn()
+                  .mockResolvedValueOnce([[publicacao], 1]),
+              }),
+            }),
+          }),
+        }),
+      } as any);
+
+      const { data, count } = await service.findAll(
+        { isReported: true },
+        ordering,
+        pagination,
+      );
+      expect(count).toEqual(1);
+      expect(data[0]).toEqual(publicacao);
+    });
   });
 });

@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 import { Ordering } from '../shared/decorators/ordenate.decorator';
 import { Pagination } from '../shared/decorators/paginate.decorator';
 import {
+  getWhereClauseEqual,
   getWhereClauseNumber,
   getWhereClauseString,
 } from '../shared/helpers/sql-query-helper';
@@ -95,7 +96,7 @@ export class PublicacaoService {
 
     whereClause += getWhereClauseNumber(filter.id, 'id');
     whereClause += getWhereClauseString(filter.titulo, 'titulo');
-    whereClause += getWhereClauseNumber(filter.categoria, 'categoria');
+    whereClause += getWhereClauseEqual(filter.categoria, 'categoria');
     if (filter.isReported) {
       whereClause += 'AND array_length("idUsuarioReporte", 1) > 0';
     }

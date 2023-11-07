@@ -4,4 +4,5 @@ export interface IPublicacaoFilter {
   id?: number;
   titulo?: string;
   categoria?: ECategoriaPublicacao;
+  isReported?: boolean;
 }

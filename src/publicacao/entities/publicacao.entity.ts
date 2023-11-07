@@ -26,8 +26,8 @@ export class Publicacao {
   })
   categoria!: ECategoriaPublicacao;
 
-  @Column('integer')
-  contagemReportes!: number;
+  @Column('integer', { array: true, default: [] })
+  idUsuarioReporte!: number[];
 
   constructor(createPublicacaoDto: CreatePublicacaoDto | UpdatePublicacaoDto) {
     Object.assign(this, createPublicacaoDto);

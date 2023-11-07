@@ -1,9 +1,22 @@
 import {
   getWhereClauseArrayNumber,
   getWhereClauseBoolean,
+  getWhereClauseEqual,
   getWhereClauseNumber,
   getWhereClauseString,
 } from './sql-query-helper';
+
+describe('Where Clause EQUAL', () => {
+  it('should return empty string if value is undefined', () => {
+    const where = getWhereClauseEqual(undefined, 'descricao');
+    expect(where).toBe('');
+  });
+
+  it('should return where string based on given value and tableColumn', () => {
+    const where = getWhereClauseEqual('teste', 'descricao');
+    expect(where).toBe(" AND descricao = 'teste'");
+  });
+});
 
 describe('Where Clause STRING', () => {
   it('should return empty string if value is undefined', () => {

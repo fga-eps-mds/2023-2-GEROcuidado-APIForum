@@ -1,5 +1,14 @@
 export type ClauseNumber = number | string | undefined;
 
+export function getWhereClauseEqual(
+  value: ClauseNumber,
+  tableColumn: string,
+): string {
+  if (value === undefined) return '';
+
+  return ` AND ${tableColumn} = '${String(value)}'`;
+}
+
 export function getWhereClauseString(
   value: string | undefined,
   tableColumn: string,

@@ -138,7 +138,7 @@
     "reporters": [
       "default",
       [
-        "jest-sonar",
+        "jest-junit",
         {
           "outputDirectory": "reports",
           "outputName": "sonar-report.xml"

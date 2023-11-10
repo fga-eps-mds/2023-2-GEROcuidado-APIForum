@@ -8,8 +8,11 @@ module.exports = {
             'jest-sonar',
             {
                 outputDirectory: 'reports',
-                outputName: 'sonar-report.xml'
+                outputName: 'sonar-report.xml',
+                reportedMetrics: ['test_errors', 'test_execution_time', 'test_failures', 'tests', 'coverage'],
             }
         ]
-    ]
+    ],
+    coverageReporters: ['text', 'lcov', 'clover'],
+    
 };

@@ -107,5 +107,45 @@
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "rbbit.typescript-hero"
-  ]
+  ],
+    "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage/unit",
+    "coveragePathIgnorePatterns": [
+      "src/migration",
+      ".module.ts$",
+      ".spec.ts$",
+      ".dto.ts$",
+      ".entity.ts$",
+      "main.ts$",
+      "ormconfig.ts$",
+      ".seed.ts$",
+      ".factory.ts$",
+      "src/migration"
+    ],
+    "testEnvironment": "node",
+    "reporters": [
+      "default",
+      [
+        "jest-sonar",
+        {
+          "outputDirectory": "reports",
+          "outputName": "sonar-report.xml"
+        }
+      ]
+    ]    
+  }
+}
 }

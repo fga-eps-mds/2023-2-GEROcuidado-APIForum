@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - test/sonar
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
@@ -27,6 +28,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      - name: Sincroniza cobertura de testes com o Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: true
+          flags: jest
+          name: 2023-2-GEROcuidado-APIForum
+          verbose: true
 
   test-e2e:
     name: Test E2E

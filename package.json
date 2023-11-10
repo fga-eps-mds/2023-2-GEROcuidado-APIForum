@@ -134,6 +134,16 @@
       ".factory.ts$",
       "src/migration"
     ],
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "reporters": [
+      "default",
+      [
+        "jest-sonar",
+        {
+          "outputDirectory": "reports",
+          "outputName": "sonar-report.xml"
+        }
+      ]
+    ]    
   }
 }

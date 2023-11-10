@@ -3,9 +3,9 @@ on:
   push:
     branches:
       - main
-      - test/sonar
+      - test/sonarcloud
   pull_request:
-    types: [opened, synchronize, reopened]
+    # types: [opened, synchronize, reopened]
 jobs:
   test-unit:
     name: Test Unit & Scan

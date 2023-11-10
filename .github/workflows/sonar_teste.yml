@@ -1,25 +1,27 @@
-name: Build
+name: Análise de Código
 on:
- push:
-   branches:
-     - main
-     - test/sonarcloud
- pull_request:
-   types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - main
+      - test/sonarcloud
+  pull_request:
+    # types: [opened, synchronize, reopened]
+    branches:
+      - main
 jobs:
-  sonarqube:
-    name: sonarqube
+  sonarcloud:
+    name: SonarCloud
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0 
-      - name: Install dependencies
+          fetch-depth: 0
+
+      - name: Instala dependências
         run: yarn
-      - name: Test and coverage
-        run: yarn jest --coverage
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@master
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+      - name: Executa linter
+        run: yarn lint
+
+      - name: Executa testes e gera cobertura
+        run: yarn test:all

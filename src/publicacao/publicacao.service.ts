@@ -8,7 +8,6 @@ import { Pagination } from '../shared/decorators/paginate.decorator';
 import {
   getWhereClauseEqual,
   getWhereClauseNumber,
-  getWhereClauseString,
 } from '../shared/helpers/sql-query-helper';
 import { ResponsePaginate } from '../shared/interfaces/response-paginate.interface';
 import { CreatePublicacaoDto } from './dto/create-publicacao.dto';
@@ -95,7 +94,9 @@ export class PublicacaoService {
     let whereClause = '1 = 1 ';
 
     whereClause += getWhereClauseNumber(filter.id, 'id');
-    whereClause += getWhereClauseString(filter.titulo, 'titulo');
+    if (filter.titulo) {
+      whereClause += `AND unaccent(titulo) ilike unaccent('%${filter.titulo}%')`;
+    }
     whereClause += getWhereClauseEqual(filter.categoria, 'categoria');
     if (filter.isReported) {
       whereClause += 'AND array_length("idUsuarioReporte", 1) > 0';

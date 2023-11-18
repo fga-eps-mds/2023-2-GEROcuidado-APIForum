@@ -144,7 +144,7 @@
         {
           "outputDirectory": "reports",
           "outputName": "sonar-report.xml",
-          "reportedMetrics": ["test_errors", "test_execution_time", "test_failures", "tests", "coverage"]
+          "sonarQubeVersion": "LATEST"
         }
       ]
     ]    

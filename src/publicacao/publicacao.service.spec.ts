@@ -97,7 +97,7 @@ describe('PublicacaoService', () => {
   describe('findAll', () => {
     const publicacao = {
       id: 1,
-      titulo: 'titulo',
+      titulo: 'título',
       descricao: 'descricao',
     };
 
@@ -152,6 +152,31 @@ describe('PublicacaoService', () => {
 
       const { data, count } = await service.findAll(
         { isReported: true },
+        ordering,
+        pagination,
+      );
+      expect(count).toEqual(1);
+      expect(data[0]).toEqual(publicacao);
+    });
+
+    it('should findAll Publicacao with title unaccent', async () => {
+      jest.spyOn(clientProxy, 'send').mockReturnValue(of([{ id: 1 }]) as any);
+      jest.spyOn(repository, 'createQueryBuilder').mockReturnValue({
+        where: () => ({
+          limit: () => ({
+            offset: () => ({
+              orderBy: () => ({
+                getManyAndCount: jest
+                  .fn()
+                  .mockResolvedValueOnce([[publicacao], 1]),
+              }),
+            }),
+          }),
+        }),
+      } as any);
+
+      const { data, count } = await service.findAll(
+        { titulo: "titulo" },
         ordering,
         pagination,
       );

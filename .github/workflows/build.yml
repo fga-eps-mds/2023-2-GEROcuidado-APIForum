@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - develop
       - sonar/teste
   pull_request:
      types: [opened, synchronize, reopened]

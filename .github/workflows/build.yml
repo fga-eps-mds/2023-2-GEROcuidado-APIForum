@@ -5,6 +5,7 @@ on:
       - main
       - develop
       - sonar/teste
+      - release-sonar
   pull_request:
      types: [opened, synchronize, reopened]
 jobs:
